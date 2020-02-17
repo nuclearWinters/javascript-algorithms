@@ -1,117 +1,58 @@
-import GraphVertex from '../../../../data-structures/graph/GraphVertex';
-import GraphEdge from '../../../../data-structures/graph/GraphEdge';
-import Graph from '../../../../data-structures/graph/Graph';
-import dijkstra from '../dijkstra';
+import GraphVertex from "../../../../data-structures/graph/GraphVertex";
+import GraphEdge from "../../../../data-structures/graph/GraphEdge";
+import Graph from "../../../../data-structures/graph/Graph";
+import dijkstra from "../dijkstra";
 
-describe('dijkstra', () => {
-  it('should find minimum paths to all vertices for undirected graph', () => {
-    const vertexA = new GraphVertex('A');
-    const vertexB = new GraphVertex('B');
-    const vertexC = new GraphVertex('C');
-    const vertexD = new GraphVertex('D');
-    const vertexE = new GraphVertex('E');
-    const vertexF = new GraphVertex('F');
-    const vertexG = new GraphVertex('G');
-    const vertexH = new GraphVertex('H');
+describe("dijkstra", () => {
+  it("should find minimum paths to all vertices for undirected graph", () => {
+    const vertexV1 = new GraphVertex("V1");
+    const vertexV2 = new GraphVertex("V2");
+    const vertexV3 = new GraphVertex("V3");
+    const vertexV4 = new GraphVertex("V4");
+    const vertexV5 = new GraphVertex("V5");
+    const vertexV6 = new GraphVertex("V6");
+    const vertexV7 = new GraphVertex("V7");
 
-    const edgeAB = new GraphEdge(vertexA, vertexB, 4);
-    const edgeAE = new GraphEdge(vertexA, vertexE, 7);
-    const edgeAC = new GraphEdge(vertexA, vertexC, 3);
-    const edgeBC = new GraphEdge(vertexB, vertexC, 6);
-    const edgeBD = new GraphEdge(vertexB, vertexD, 5);
-    const edgeEC = new GraphEdge(vertexE, vertexC, 8);
-    const edgeED = new GraphEdge(vertexE, vertexD, 2);
-    const edgeDC = new GraphEdge(vertexD, vertexC, 11);
-    const edgeDG = new GraphEdge(vertexD, vertexG, 10);
-    const edgeDF = new GraphEdge(vertexD, vertexF, 2);
-    const edgeFG = new GraphEdge(vertexF, vertexG, 3);
-    const edgeEG = new GraphEdge(vertexE, vertexG, 5);
-
-    const graph = new Graph();
-    graph
-      .addVertex(vertexH)
-      .addEdge(edgeAB)
-      .addEdge(edgeAE)
-      .addEdge(edgeAC)
-      .addEdge(edgeBC)
-      .addEdge(edgeBD)
-      .addEdge(edgeEC)
-      .addEdge(edgeED)
-      .addEdge(edgeDC)
-      .addEdge(edgeDG)
-      .addEdge(edgeDF)
-      .addEdge(edgeFG)
-      .addEdge(edgeEG);
-
-    const { distances, previousVertices } = dijkstra(graph, vertexA);
-
-    expect(distances).toEqual({
-      H: Infinity,
-      A: 0,
-      B: 4,
-      E: 7,
-      C: 3,
-      D: 9,
-      G: 12,
-      F: 11,
-    });
-
-    expect(previousVertices.F.getKey()).toBe('D');
-    expect(previousVertices.D.getKey()).toBe('B');
-    expect(previousVertices.B.getKey()).toBe('A');
-    expect(previousVertices.G.getKey()).toBe('E');
-    expect(previousVertices.C.getKey()).toBe('A');
-    expect(previousVertices.A).toBeNull();
-    expect(previousVertices.H).toBeNull();
-  });
-
-  it('should find minimum paths to all vertices for directed graph with negative edge weights', () => {
-    const vertexS = new GraphVertex('S');
-    const vertexE = new GraphVertex('E');
-    const vertexA = new GraphVertex('A');
-    const vertexD = new GraphVertex('D');
-    const vertexB = new GraphVertex('B');
-    const vertexC = new GraphVertex('C');
-    const vertexH = new GraphVertex('H');
-
-    const edgeSE = new GraphEdge(vertexS, vertexE, 8);
-    const edgeSA = new GraphEdge(vertexS, vertexA, 10);
-    const edgeED = new GraphEdge(vertexE, vertexD, 1);
-    const edgeDA = new GraphEdge(vertexD, vertexA, -4);
-    const edgeDC = new GraphEdge(vertexD, vertexC, -1);
-    const edgeAC = new GraphEdge(vertexA, vertexC, 2);
-    const edgeCB = new GraphEdge(vertexC, vertexB, -2);
-    const edgeBA = new GraphEdge(vertexB, vertexA, 1);
+    const edgeV1V2 = new GraphEdge(vertexV1, vertexV2, 5);
+    const edgeV2V3 = new GraphEdge(vertexV2, vertexV3, 1);
+    const edgeV3V4 = new GraphEdge(vertexV3, vertexV4, 1);
+    const edgeV4V6 = new GraphEdge(vertexV4, vertexV6, 13);
+    const edgeV1V4 = new GraphEdge(vertexV1, vertexV4, 12);
+    const edgeV1V3 = new GraphEdge(vertexV1, vertexV3, 7);
+    const edgeV2V5 = new GraphEdge(vertexV2, vertexV5, 6);
+    const edgeV3V6 = new GraphEdge(vertexV3, vertexV6, 10);
+    const edgeV5V6 = new GraphEdge(vertexV5, vertexV6, 2);
+    const edgeV5V7 = new GraphEdge(vertexV5, vertexV7, 7);
+    const edgeV6V7 = new GraphEdge(vertexV6, vertexV7, 3);
+    const edgeV3V5 = new GraphEdge(vertexV3, vertexV5, 5);
 
     const graph = new Graph(true);
     graph
-      .addVertex(vertexH)
-      .addEdge(edgeSE)
-      .addEdge(edgeSA)
-      .addEdge(edgeED)
-      .addEdge(edgeDA)
-      .addEdge(edgeDC)
-      .addEdge(edgeAC)
-      .addEdge(edgeCB)
-      .addEdge(edgeBA);
+      .addEdge(edgeV1V2)
+      .addEdge(edgeV2V3)
+      .addEdge(edgeV3V4)
+      .addEdge(edgeV4V6)
+      .addEdge(edgeV1V4)
+      .addEdge(edgeV1V3)
+      .addEdge(edgeV2V5)
+      .addEdge(edgeV3V6)
+      .addEdge(edgeV5V6)
+      .addEdge(edgeV5V7)
+      .addEdge(edgeV6V7)
+      .addEdge(edgeV3V5);
 
-    const { distances, previousVertices } = dijkstra(graph, vertexS);
+    const { distances } = dijkstra(graph, vertexV1);
+
+    console.log(distances);
 
     expect(distances).toEqual({
-      H: Infinity,
-      S: 0,
-      A: 5,
-      B: 5,
-      C: 7,
-      D: 9,
-      E: 8,
+      V1: 0,
+      V2: 5,
+      V3: 6,
+      V4: 7,
+      V6: 13,
+      V5: 11,
+      V7: 16
     });
-
-    expect(previousVertices.H).toBeNull();
-    expect(previousVertices.S).toBeNull();
-    expect(previousVertices.B.getKey()).toBe('C');
-    expect(previousVertices.C.getKey()).toBe('A');
-    expect(previousVertices.A.getKey()).toBe('D');
-    expect(previousVertices.D.getKey()).toBe('E');
   });
 });
